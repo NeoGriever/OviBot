@@ -1,3 +1,24 @@
+Object.prototype.assimilate = function(obj2) {
+  function combineObjects(obj1, obj2) {
+    let result = {};
+    Object.keys(obj1).forEach(key => {
+      if (obj1.hasOwnProperty(key)) {
+        result[key] = obj1[key];
+      }
+    });
+    Object.keys(obj2).forEach(key => {
+      if (obj2.hasOwnProperty(key)) {
+        if (obj1.hasOwnProperty(key) && typeof obj1[key] === 'object' && obj1[key] !== null && typeof obj2[key] === 'object' && obj2[key] !== null) {
+          result[key] = combineObjects(obj1[key], obj2[key]);
+        } else if (!obj1.hasOwnProperty(key)) {
+          result[key] = obj2[key];
+        }
+      }
+    });
+    return result;
+  }
+  return combineObjects(this, obj2);
+};
 Date.prototype.quickDate = function() {
   let day = this.getDate();
   let month = this.getMonth() + 1;
