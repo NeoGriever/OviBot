@@ -32,18 +32,6 @@ HTMLElement.prototype.in = function (target) {
   this.appendChild(target);
   return this;
 };
-HTMLElement.prototype.addCat = function (clickable = false, clickevent = null) {
-  if(clickable === true) {
-    let cat = main.tools.createElement(`div`, `catbox clickableStyled`);
-    cat.addEventListener(`click`, clickevent, true);
-    this.in(cat);
-    return cat;
-  } else {
-    let cat = main.tools.createElement(`div`, `catbox ${clickable}`, clickevent);
-    this.in(cat);
-    return cat;
-  }
-};
 HTMLElement.prototype.inner = function (v) {
   if(typeof v !== `undefined`) {
     this.childNodes[0].data = v;
